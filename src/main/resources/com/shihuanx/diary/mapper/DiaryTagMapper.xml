@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shihuanx.diary.mapper.DiaryTagMapper">
+
+
+    <update id="delete">
+        update diary_tag set
+        status = 0
+        <where>
+            user_id=#{userId}
+            <if test="tagIds!=null and tagIds.size()>0">
+                         and tag_id in
+                <foreach collection="tagIds" item="tagId" open="(" separator="," close=")">#{tagId}</foreach>
+            </if>
+            <if test="diaryId!=null">
+                and diary_id = #{diaryId}
+            </if>
+        </where>
+
+    </update>
+    <select id="getDiaryTagsByDiaryIds" resultType="com.shihuanx.diary.entity.DiaryTag">
+        select *
+        from diary_tag
+            <where>
+                user_id=#{userId} and status =1
+                <if test="diaryIds!=null and diaryIds.size()>0">
+                    and diary_id in
+                    <foreach collection="diaryIds" item="diaryId" open="(" separator="," close=")">#{diaryId}</foreach>
+                </if>
+            </where>
+    </select>
+</mapper>

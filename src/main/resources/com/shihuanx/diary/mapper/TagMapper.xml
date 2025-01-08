@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shihuanx.diary.mapper.TagMapper">
+
+    <insert id="addTag" useGeneratedKeys="true" keyProperty="id">
+        insert into tag (content, create_time, update_time, user_id, status)
+        values (#{content},#{createTime},#{updateTime},#{userId},#{status});
+    </insert>
+    <update id="deleteTagsByTagIds">
+        update tag set
+        status = 0 where id in
+         <foreach collection="tagIds" item="id" open="(" separator="," close=")">#{id}</foreach>
+        and user_id = #{userId}
+    </update>
+    <select id="getTagsByDiaryId" resultType="com.shihuanx.diary.entity.Tag">
+        select t.*
+        from tag t,diary_tag dt where t.id=dt.tag_id and dt.diary_id=#{diaryId} and t.user_id=#{userId} and t.status=1;
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shihuanx.diary.mapper.DiaryMapper">
+
+    <update id="deleteDiaryByDiaryIds">
+        update diary set
+        status = 0
+        <where>user_id = #{userId}
+            <choose>
+                <when test="diaryIds!=null and diaryIds.size()>0">
+                    and id in
+                    <foreach collection="diaryIds" item="id" separator="," open="(" close=")">#{id}</foreach>
+                </when>
+                <otherwise>
+                    and 1=0
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+    <select id="getDiaryListByCondition" resultType="com.shihuanx.diary.entity.Diary">
+        select distinct d.*
+        from diary d
+        left join diary_tag dt on d.id = dt.diary_id
+        left join tag t on dt.tag_id = t.id
+        <where>
+            <if test="content !=null">
+                d.content like concat('%',#{content},'%')
+            </if>
+            <if test="tag != null">
+                and t.content like concat('%',#{tag},'%')
+            </if>
+            <if test="start != null and end != null">
+                and d.${sortBy} between #{start} and #{end}
+            </if>
+            and d.user_id = #{userId}
+            and d.status  = 1
+        </where>
+        order by d.${sortBy} ${order}
+        limit #{startIndex},#{pageSize}
+    </select>
+
+</mapper>
