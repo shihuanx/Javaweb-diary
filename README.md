@@ -26,6 +26,9 @@
 7.修改标签接口
 参数：标签id 修改后的标签内容 
 ![image](https://github.com/user-attachments/assets/9e9848cc-8054-4c09-8ba0-b9865314779b)
-8.删除标签接口
+8.删除标签下的所有日记接口
 参数：标签id 可批量删除
 ![image](https://github.com/user-attachments/assets/0ea26fdc-5cc8-4869-a75d-8a768c86a9a5)
+9.删除标签接口 
+参数：标签id 日记id 可批量删除标签
+![image](https://github.com/user-attachments/assets/1ee7618c-e5cb-45a8-9428-f248954d3628)
