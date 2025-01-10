@@ -19,7 +19,7 @@
 ![image](https://github.com/user-attachments/assets/b4fced3f-53ba-4525-ac1a-3a5122172923)
 5.查询日记接口
 ![image](https://github.com/user-attachments/assets/1beb7252-cdd3-410d-8d5f-f950cf4fbed8)
-![image](https://github.com/user-attachments/assets/160af9ee-68f0-464e-9c6c-c4dbbdb8eb91)
+![image](https://github.com/user-attachments/assets/0b21ac6c-fed2-4ee4-b069-ac0663727cf8)
 6.添加标签接口
 参数：日记id 标签内容 json格式 可批量添加标签
 ![image](https://github.com/user-attachments/assets/baf17a4b-0b2b-4563-b17c-36bef6888c74)
